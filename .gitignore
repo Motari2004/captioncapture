@@ -1,0 +1,12 @@
+# Sensitive files
+credentials.json 
+drive_token.pickle 
+.pickle
+.log
+reel_captures.json
+clean_captions.txt
+full_captions.txt
+__pycache__/
+*.pyc
+*.pyo
+.env
