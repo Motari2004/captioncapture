@@ -21,3 +21,24 @@ Traceback (most recent call last):
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
     raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
 Exception: Connection.init: Connection closed while reading from the driver
+2026-06-19 14:46:38,638 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-19 14:46:38,644 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-19 14:46:40,105 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-19 14:46:40,105 - INFO - 📁 Google Drive Reader initialized
+2026-06-19 14:46:41,261 - INFO - ✅ Browser initialized
+2026-06-19 14:46:41,262 - INFO - 🚀 Caption extractor initialized
+2026-06-19 14:46:51,618 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 14:46:52,103 - INFO - Download progress: 100%
+2026-06-19 14:46:52,104 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 14:46:52,105 - INFO - 📋 Found 5 URLs from Google Drive
+2026-06-19 14:46:52,575 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 14:46:53,073 - INFO - Download progress: 100%
+2026-06-19 14:46:53,074 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 14:46:55,015 - INFO - 📥 Fetching: DW8bPjGAPq1
+2026-06-19 14:47:11,866 - INFO - 📥 Fetching: DW7Bg0Vj0DG
+2026-06-19 14:47:22,938 - INFO - 📥 Fetching: DW6misCDIpe
+2026-06-19 14:47:34,548 - ERROR - ❌ Error fetching DW6misCDIpe: Timeout 10000ms exceeded.
+2026-06-19 14:47:36,563 - INFO - 📥 Fetching: DW8XFPrAe8U
+2026-06-19 14:47:48,268 - INFO - 📥 Fetching: DW6eRgxCflh
+2026-06-19 14:48:30,622 - INFO - 🔚 Browser closed
+2026-06-19 14:48:30,622 - INFO - 🔚 Browser closed
