@@ -2,3 +2,22 @@
 2026-06-19 14:45:12,031 - INFO - 📁 Google Drive Reader initialized
 2026-06-19 14:45:15,253 - INFO - ✅ Browser initialized
 2026-06-19 14:45:15,254 - INFO - 🚀 Caption extractor initialized
+2026-06-19 14:46:10,290 - INFO - "GET /?state=y9rBPtZB3LWDV4AITzppuZ2zumd4QK&iss=https://accounts.google.com&code=4/0AdkVLPwht1ZJGUw0iCzqYQLANQpxLFsafeeqLYvKm0tT__21FAPgZGVG5HA4ALlPgIQ7Kg&scope=https://www.googleapis.com/auth/drive HTTP/1.1" 200 65
+2026-06-19 14:46:11,287 - INFO - ✅ Drive authenticated via credentials.json
+2026-06-19 14:46:11,307 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-19 14:46:13,971 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-19 14:46:13,972 - INFO - 📁 Google Drive Reader initialized
+2026-06-19 14:46:16,312 - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-5' coro=<Connection.run.<locals>.init() done, defined at C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py:309> exception=Exception('Connection.init: Connection closed while reading from the driver')>
+Traceback (most recent call last):
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 310, in init
+    self.playwright_future.set_result(await self._root_object.initialize())
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 251, in initialize
+    await self._channel.send(
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+Exception: Connection.init: Connection closed while reading from the driver
