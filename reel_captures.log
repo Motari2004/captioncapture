@@ -42,3 +42,159 @@ Exception: Connection.init: Connection closed while reading from the driver
 2026-06-19 14:47:48,268 - INFO - 📥 Fetching: DW6eRgxCflh
 2026-06-19 14:48:30,622 - INFO - 🔚 Browser closed
 2026-06-19 14:48:30,622 - INFO - 🔚 Browser closed
+2026-06-19 14:50:49,012 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-19 14:50:49,016 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-19 14:50:50,461 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-19 14:50:50,461 - INFO - 📁 Google Drive Reader initialized
+2026-06-19 14:50:52,077 - INFO - ✅ Browser initialized
+2026-06-19 14:50:52,078 - INFO - 🚀 Caption extractor initialized
+2026-06-19 14:50:55,072 - INFO - 📥 Fetching: DW6eRgxCflh
+2026-06-19 14:50:57,486 - INFO - 📥 Fetching: DW6eRgxCflh
+2026-06-19 14:52:11,255 - INFO - 📥 Fetching: DZuUNyeJOsn
+2026-06-19 14:53:23,518 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 14:53:24,031 - INFO - Download progress: 100%
+2026-06-19 14:53:24,031 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 14:53:24,032 - INFO - 📋 Found 5 URLs from Google Drive
+2026-06-19 14:53:24,492 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 14:53:24,976 - INFO - Download progress: 100%
+2026-06-19 14:53:24,977 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 14:57:33,939 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 14:57:34,419 - INFO - Download progress: 100%
+2026-06-19 14:57:34,419 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 14:57:34,426 - INFO - 📋 Found 5 URLs from Google Drive
+2026-06-19 14:57:34,830 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 14:57:35,312 - INFO - Download progress: 100%
+2026-06-19 14:57:35,312 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 14:57:38,891 - INFO - 📥 Fetching: DZoBYtyvxNV
+2026-06-19 14:57:49,733 - INFO - 📥 Fetching: DZoX-sDM-Dn
+2026-06-19 14:58:00,482 - INFO - 📥 Fetching: DZu4_KTuvjz
+2026-06-19 14:58:18,796 - INFO - 📥 Fetching: DZpz34HIzT_
+2026-06-19 14:58:34,942 - INFO - 📥 Fetching: DZoWnIyM07o
+2026-06-19 14:59:17,568 - INFO - 📥 Fetching: DZoBYtyvxNV
+2026-06-19 15:05:42,314 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-19 15:05:42,320 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-19 15:05:43,746 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-19 15:05:43,747 - INFO - 📁 Google Drive Reader initialized
+2026-06-19 15:05:45,915 - INFO - ✅ Browser initialized
+2026-06-19 15:05:45,916 - INFO - 🚀 Caption extractor initialized
+2026-06-19 15:05:49,788 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 15:05:50,844 - INFO - Download progress: 100%
+2026-06-19 15:05:50,844 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 15:05:50,845 - INFO - 📋 Found 5 URLs from Google Drive
+2026-06-19 15:05:51,488 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 15:05:52,511 - INFO - Download progress: 100%
+2026-06-19 15:05:52,512 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 15:05:53,464 - INFO - 📥 Fetching: DZoBYtyvxNV
+2026-06-19 15:06:04,286 - INFO - 📥 Fetching: DZoX-sDM-Dn
+2026-06-19 15:06:14,426 - INFO - 📥 Fetching: DZu4_KTuvjz
+2026-06-19 15:06:31,905 - INFO - 📥 Fetching: DZpz34HIzT_
+2026-06-19 15:06:48,582 - INFO - 📥 Fetching: DZoWnIyM07o
+2026-06-19 15:17:48,192 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-19 15:17:48,201 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-19 15:17:49,666 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-19 15:17:49,666 - INFO - 📁 Google Drive Manager initialized
+2026-06-19 15:17:51,438 - INFO - ✅ Browser initialized
+2026-06-19 15:17:51,439 - INFO - 🚀 Caption extractor initialized
+2026-06-19 15:18:08,164 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 15:18:08,670 - INFO - Download progress: 100%
+2026-06-19 15:18:08,671 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 15:18:11,167 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 15:18:11,659 - INFO - Download progress: 100%
+2026-06-19 15:18:11,659 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 15:18:11,660 - INFO - 📥 Fetching: DZoBYtyvxNV
+2026-06-19 15:18:26,358 - INFO - 📥 Fetching: DZoX-sDM-Dn
+2026-06-19 15:18:40,601 - INFO - 📥 Fetching: DZu4_KTuvjz
+2026-06-19 15:18:57,643 - INFO - 📥 Fetching: DZpz34HIzT_
+2026-06-19 15:19:11,033 - INFO - 📥 Fetching: DZoWnIyM07o
+2026-06-19 15:19:25,766 - ERROR - ❌ Error fetching DZoWnIyM07o: Timeout 10000ms exceeded.
+2026-06-19 15:19:28,411 - INFO - 📤 Creating: captions_data.json
+2026-06-19 15:19:30,701 - INFO - ✅ Created captions file: captions_data.json
+2026-06-19 15:19:30,704 - ERROR - Save to Drive error: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\PC\\AppData\\Local\\Temp\\tmp5vi8ijwk.json'
+2026-06-19 15:35:20,794 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 15:35:21,936 - INFO - Download progress: 100%
+2026-06-19 15:35:21,936 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 15:35:25,116 - INFO - 📥 Downloading: shared_reels.json
+2026-06-19 15:35:26,151 - INFO - Download progress: 100%
+2026-06-19 15:35:26,152 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-19 15:35:26,155 - INFO - 📥 Fetching: DVaQo9gDEEt
+2026-06-19 15:35:43,212 - ERROR - ❌ Error fetching DVaQo9gDEEt: Timeout 10000ms exceeded.
+2026-06-19 15:35:45,229 - INFO - 📥 Fetching: DOv89QlgdZ4
+2026-06-19 15:35:59,712 - INFO - 📥 Fetching: DMVY-WksZf0
+2026-06-19 15:36:13,575 - INFO - 📥 Fetching: DU5tsD9iM-I
+2026-06-19 15:36:25,475 - ERROR - ❌ Error fetching DU5tsD9iM-I: Timeout 10000ms exceeded.
+2026-06-19 15:36:27,495 - INFO - 📥 Fetching: DMY0vgtNQDX
+2026-06-19 15:36:39,488 - INFO - 📤 Updating: captions_data.json
+2026-06-19 15:36:42,680 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-19 15:36:42,682 - ERROR - Save to Drive error: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\PC\\AppData\\Local\\Temp\\tmpouin188b.json'
+2026-06-19 15:38:46,498 - INFO - 🔚 Browser closed
+2026-06-19 15:38:46,500 - INFO - 🔚 Browser closed
+2026-06-20 14:56:21,835 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 14:56:21,852 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 14:56:25,178 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 14:56:25,179 - INFO - 📁 Google Drive Manager initialized
+2026-06-20 14:56:40,479 - INFO - ✅ Browser initialized
+2026-06-20 14:56:40,479 - INFO - 🚀 Caption extractor initialized
+2026-06-20 14:59:33,629 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 14:59:34,101 - INFO - Download progress: 100%
+2026-06-20 14:59:34,101 - INFO - ✅ Loaded shared data with 0 URLs
+2026-06-20 14:59:35,991 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 14:59:36,577 - INFO - Download progress: 100%
+2026-06-20 14:59:36,577 - INFO - ✅ Loaded shared data with 0 URLs
+2026-06-20 15:00:43,695 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:00:44,288 - INFO - Download progress: 100%
+2026-06-20 15:00:44,289 - INFO - ✅ Loaded shared data with 5 URLs
+2026-06-20 15:08:46,100 - INFO - 🔚 Browser closed
+2026-06-20 15:08:46,100 - INFO - 🔚 Browser closed
+2026-06-20 15:08:55,414 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 15:08:55,426 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 15:08:58,220 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 15:08:58,220 - INFO - 📁 Google Drive Manager initialized
+2026-06-20 15:09:00,059 - INFO - ✅ Browser initialized
+2026-06-20 15:09:00,059 - INFO - 🚀 Caption extractor initialized
+2026-06-20 15:14:34,741 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:14:39,661 - INFO - Download progress: 100%
+2026-06-20 15:14:39,662 - INFO - ✅ Loaded shared data with 7 URLs
+2026-06-20 15:21:26,123 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 15:21:26,130 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 15:21:28,753 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 15:21:28,753 - INFO - 📁 Google Drive Manager initialized
+2026-06-20 15:21:30,151 - INFO - ✅ Browser initialized
+2026-06-20 15:21:30,151 - INFO - 🚀 Caption extractor initialized
+2026-06-20 15:21:30,786 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:21:31,984 - INFO - Download progress: 100%
+2026-06-20 15:21:31,990 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 15:30:32,049 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:30:33,103 - INFO - Download progress: 100%
+2026-06-20 15:30:33,105 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 15:48:38,749 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:48:39,767 - INFO - Download progress: 100%
+2026-06-20 15:48:39,767 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 15:48:42,841 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:48:43,788 - INFO - Download progress: 100%
+2026-06-20 15:48:43,788 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 15:48:47,963 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:48:48,881 - INFO - Download progress: 100%
+2026-06-20 15:48:48,881 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 15:51:16,097 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:51:17,259 - INFO - Download progress: 100%
+2026-06-20 15:51:17,259 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 15:52:10,220 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:52:11,324 - INFO - Download progress: 100%
+2026-06-20 15:52:11,325 - INFO - ✅ Loaded shared data with 9 URLs
+2026-06-20 15:55:14,185 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 15:55:15,201 - INFO - Download progress: 100%
+2026-06-20 15:55:15,201 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 16:07:30,366 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 16:07:30,915 - INFO - Download progress: 100%
+2026-06-20 16:07:30,915 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 16:47:10,300 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 16:47:10,318 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 16:47:13,507 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 16:47:13,507 - INFO - 📁 Google Drive Manager initialized
+2026-06-20 16:47:19,224 - INFO - ✅ Browser initialized
+2026-06-20 16:47:19,227 - INFO - 🚀 Caption extractor initialized
+2026-06-20 16:47:20,594 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 16:47:21,210 - INFO - Download progress: 100%
+2026-06-20 16:47:21,210 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 16:48:08,713 - INFO - 🔚 Browser closed
+2026-06-20 16:48:08,714 - INFO - 🔚 Browser closed

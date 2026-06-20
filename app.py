@@ -1,7 +1,7 @@
 """
 Instagram Reel Caption Capture - Web API for Render
 Extracts clean captions from Instagram Reel URLs via API
-Integrated with Google Drive to read shared URLs
+Saves captions with URL mapping to Google Drive
 """
 
 import asyncio
@@ -13,6 +13,7 @@ import os
 import base64
 import pickle
 import io
+import math
 from typing import List, Dict, Optional
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
@@ -25,7 +26,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-from googleapiclient.http import MediaIoBaseDownload
+from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 
 # Setup logging
 logging.basicConfig(
@@ -38,7 +39,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Instagram Reel Caption Capture", version="2.0.0")
+app = FastAPI(title="Instagram Reel Caption Capture", version="3.0.0")
 
 # Enable CORS
 app.add_middleware(
@@ -53,6 +54,35 @@ app.add_middleware(
 SCOPES = ['https://www.googleapis.com/auth/drive']
 DRIVE_FOLDER_NAME = "Reel_Finder_Data"
 SHARED_FILE_NAME = "shared_reels.json"
+CAPTIONS_FILE_NAME = "captions_data.json"
+
+
+def safe_int(value):
+    """Safely convert to int, handling NaN and None"""
+    try:
+        if value is None:
+            return 0
+        if isinstance(value, float) and math.isnan(value):
+            return 0
+        if isinstance(value, float) and math.isinf(value):
+            return 0
+        return int(float(value))
+    except (ValueError, TypeError):
+        return 0
+
+
+def safe_float(value):
+    """Safely convert to float, handling NaN and None"""
+    try:
+        if value is None:
+            return 0.0
+        if isinstance(value, float) and math.isnan(value):
+            return 0.0
+        if isinstance(value, float) and math.isinf(value):
+            return 0.0
+        return float(value)
+    except (ValueError, TypeError):
+        return 0.0
 
 
 @dataclass
@@ -71,17 +101,33 @@ class ReelCaptionData:
     mentioned_users: List[str] = field(default_factory=list)
     is_video: bool = True
     duration: int = 0
+    topic: str = ""  # Added for topic tracking
     
     def to_dict(self):
-        return asdict(self)
+        return {
+            "url": str(self.url),
+            "shortcode": str(self.shortcode),
+            "username": str(self.username),
+            "caption": str(self.caption),
+            "full_caption": str(self.full_caption),
+            "likes": safe_int(self.likes),
+            "comments": safe_int(self.comments),
+            "views": safe_int(self.views),
+            "timestamp": str(self.timestamp),
+            "hashtags": [str(h) for h in self.hashtags] if self.hashtags else [],
+            "mentioned_users": [str(m) for m in self.mentioned_users] if self.mentioned_users else [],
+            "is_video": bool(self.is_video),
+            "duration": safe_int(self.duration),
+            "topic": str(self.topic)
+        }
 
 
-class GoogleDriveReader:
-    """Read shared data from Google Drive"""
+class GoogleDriveManager:
+    """Manage Google Drive operations for captions data"""
     
     def __init__(self):
         self.service = self._authenticate()
-        self.folder_id = self._get_folder_id()
+        self.folder_id = self._get_or_create_folder()
     
     def _authenticate(self):
         """Authenticate with Google Drive"""
@@ -132,8 +178,8 @@ class GoogleDriveReader:
         logger.error("❌ No Drive credentials found")
         return None
     
-    def _get_folder_id(self):
-        """Get the folder ID for Reel_Finder_Data"""
+    def _get_or_create_folder(self):
+        """Get or create the folder for captions data"""
         if not self.service:
             return None
         
@@ -141,13 +187,22 @@ class GoogleDriveReader:
             query = f"name='{DRIVE_FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false"
             results = self.service.files().list(q=query, fields="files(id)").execute()
             files = results.get('files', [])
+            
             if files:
                 logger.info(f"✅ Found folder: {DRIVE_FOLDER_NAME}")
                 return files[0]['id']
-            logger.warning(f"Folder '{DRIVE_FOLDER_NAME}' not found")
-            return None
+            
+            logger.info(f"📁 Creating folder: {DRIVE_FOLDER_NAME}")
+            file_metadata = {
+                'name': DRIVE_FOLDER_NAME,
+                'mimeType': 'application/vnd.google-apps.folder'
+            }
+            folder = self.service.files().create(body=file_metadata, fields='id').execute()
+            logger.info(f"✅ Created folder: {DRIVE_FOLDER_NAME}")
+            return folder.get('id')
+            
         except Exception as e:
-            logger.error(f"Error finding folder: {e}")
+            logger.error(f"Folder error: {e}")
             return None
     
     async def load_shared_data(self) -> Optional[Dict]:
@@ -187,40 +242,143 @@ class GoogleDriveReader:
             logger.error(f"Load from Drive error: {e}")
             return None
     
-    async def get_all_urls(self) -> List[str]:
-        """Get all reel URLs from the shared file"""
-        data = await self.load_shared_data()
-        if not data:
-            return []
+    async def save_captions_data(self, captions: List[ReelCaptionData]) -> bool:
+        """Save captions data to Google Drive"""
+        if not self.service or not self.folder_id:
+            logger.error("No Drive service available")
+            return False
         
-        urls = []
-        topics = data.get("topics", {})
-        for topic, reels in topics.items():
-            for reel in reels:
-                if isinstance(reel, dict) and reel.get("url"):
-                    urls.append(reel["url"])
-        
-        logger.info(f"📋 Found {len(urls)} URLs from Google Drive")
-        return urls
+        try:
+            # Prepare data
+            data = {
+                "timestamp": datetime.now().isoformat(),
+                "total_captures": len(captions),
+                "captions": [c.to_dict() for c in captions],
+                "url_mapping": {c.url: c.shortcode for c in captions},
+                "shortcode_mapping": {c.shortcode: c.url for c in captions},
+                "source": "caption_capture",
+                "last_updated": datetime.now().isoformat()
+            }
+            
+            # Check if file exists
+            query = f"'{self.folder_id}' in parents and name='{CAPTIONS_FILE_NAME}' and trashed=false"
+            results = self.service.files().list(q=query, fields="files(id)").execute()
+            files = results.get('files', [])
+            
+            # Create temporary file
+            import tempfile
+            file_content = json.dumps(data, indent=2, ensure_ascii=False)
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as temp_file:
+                temp_file.write(file_content)
+                temp_path = temp_file.name
+            
+            try:
+                media = MediaFileUpload(
+                    temp_path,
+                    mimetype='application/json',
+                    resumable=True
+                )
+                
+                if files:
+                    # Update existing file
+                    file_id = files[0]['id']
+                    logger.info(f"📤 Updating: {CAPTIONS_FILE_NAME}")
+                    self.service.files().update(
+                        fileId=file_id,
+                        media_body=media
+                    ).execute()
+                    logger.info(f"✅ Updated captions file: {CAPTIONS_FILE_NAME}")
+                else:
+                    # Create new file
+                    logger.info(f"📤 Creating: {CAPTIONS_FILE_NAME}")
+                    file_metadata = {
+                        'name': CAPTIONS_FILE_NAME,
+                        'parents': [self.folder_id],
+                        'description': f"Instagram Reel Captions - {datetime.now().strftime('%Y-%m-%d')}"
+                    }
+                    self.service.files().create(
+                        body=file_metadata,
+                        media_body=media
+                    ).execute()
+                    logger.info(f"✅ Created captions file: {CAPTIONS_FILE_NAME}")
+                
+                return True
+                
+            finally:
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+                    logger.debug(f"🗑️ Removed temp file: {temp_path}")
+            
+        except Exception as e:
+            logger.error(f"Save to Drive error: {e}")
+            return False
     
-    async def get_topics(self) -> Dict[str, List[Dict]]:
-        """Get all topics with their reels"""
-        data = await self.load_shared_data()
-        if not data:
-            return {}
-        return data.get("topics", {})
-    
-    async def get_urls_by_topic(self, topic: str) -> List[str]:
-        """Get URLs for a specific topic"""
-        topics = await self.get_topics()
-        if topic not in topics:
-            return []
+    async def load_captions_data(self) -> Optional[Dict]:
+        """Load captions data from Google Drive"""
+        if not self.service or not self.folder_id:
+            return None
         
-        urls = []
-        for reel in topics[topic]:
-            if isinstance(reel, dict) and reel.get("url"):
-                urls.append(reel["url"])
-        return urls
+        try:
+            query = f"'{self.folder_id}' in parents and name='{CAPTIONS_FILE_NAME}' and trashed=false"
+            results = self.service.files().list(q=query, fields="files(id, name)").execute()
+            files = results.get('files', [])
+            
+            if not files:
+                logger.info(f"No captions file '{CAPTIONS_FILE_NAME}' found")
+                return None
+            
+            file_id = files[0]['id']
+            logger.info(f"📥 Downloading: {CAPTIONS_FILE_NAME}")
+            
+            request = self.service.files().get_media(fileId=file_id)
+            fh = io.BytesIO()
+            downloader = MediaIoBaseDownload(fh, request)
+            
+            done = False
+            while not done:
+                status, done = downloader.next_chunk()
+                if status:
+                    progress = int(status.progress() * 100)
+                    logger.info(f"Download progress: {progress}%")
+            
+            fh.seek(0)
+            data = json.loads(fh.read().decode('utf-8'))
+            logger.info(f"✅ Loaded captions data with {data.get('total_captures', 0)} captions")
+            return data
+            
+        except Exception as e:
+            logger.error(f"Load from Drive error: {e}")
+            return None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class InstagramCaptionExtractor:
@@ -273,7 +431,7 @@ class InstagramCaptionExtractor:
                 return match.group(1)
         return None
     
-    async def get_reel_caption(self, url: str) -> Optional[ReelCaptionData]:
+    async def get_reel_caption(self, url: str, topic: str = "") -> Optional[ReelCaptionData]:
         """Get full caption from a single reel URL"""
         shortcode = self.extract_shortcode(url)
         if not shortcode:
@@ -372,12 +530,20 @@ class InstagramCaptionExtractor:
                     
                     const likesMatch = document.body.textContent.match(/([\\d,.]+)\\s*(?:likes|❤️)/i);
                     if (likesMatch) {
-                        result.likes = parseInt(likesMatch[1].replace(/,/g, ''));
+                        try {
+                            result.likes = parseInt(likesMatch[1].replace(/,/g, '')) || 0;
+                        } catch (e) {
+                            result.likes = 0;
+                        }
                     }
                     
                     const commentsMatch = document.body.textContent.match(/([\\d,.]+)\\s*(?:comments|💬)/i);
                     if (commentsMatch) {
-                        result.comments = parseInt(commentsMatch[1].replace(/,/g, ''));
+                        try {
+                            result.comments = parseInt(commentsMatch[1].replace(/,/g, '')) || 0;
+                        } catch (e) {
+                            result.comments = 0;
+                        }
                     }
                     
                     return result;
@@ -421,14 +587,20 @@ class InstagramCaptionExtractor:
             if likes == 0 and full_caption:
                 likes_match = re.search(r'([\\d,.]+)\\s*(?:likes|❤️)', full_caption, re.IGNORECASE)
                 if likes_match:
-                    likes_str = likes_match.group(1).replace(',', '')
-                    likes = int(float(likes_str))
+                    try:
+                        likes_str = likes_match.group(1).replace(',', '')
+                        likes = int(float(likes_str))
+                    except (ValueError, TypeError):
+                        likes = 0
             
             if comments == 0 and full_caption:
                 comments_match = re.search(r'([\\d,.]+)\\s*(?:comments|💬)', full_caption, re.IGNORECASE)
                 if comments_match:
-                    comments_str = comments_match.group(1).replace(',', '')
-                    comments = int(float(comments_str))
+                    try:
+                        comments_str = comments_match.group(1).replace(',', '')
+                        comments = int(float(comments_str))
+                    except (ValueError, TypeError):
+                        comments = 0
             
             return ReelCaptionData(
                 url=url,
@@ -436,14 +608,15 @@ class InstagramCaptionExtractor:
                 username=username if username else 'unknown',
                 caption=clean_caption,
                 full_caption=full_caption,
-                likes=likes,
-                comments=comments,
-                views=data.get('views', 0),
+                likes=safe_int(likes),
+                comments=safe_int(comments),
+                views=safe_int(data.get('views', 0)),
                 timestamp=datetime.now().isoformat(),
                 hashtags=data.get('hashtags', []),
                 mentioned_users=data.get('mentioned_users', []),
                 is_video=data.get('is_video', True),
-                duration=data.get('duration', 0)
+                duration=safe_int(data.get('duration', 0)),
+                topic=topic
             )
             
         except Exception as e:
@@ -479,28 +652,45 @@ class InstagramCaptionExtractor:
         
         return caption if caption and len(caption) > 5 else 'No caption'
     
-    async def get_multiple_captions(self, urls: List[str]) -> List[ReelCaptionData]:
-        """Get captions for multiple reel URLs"""
+    async def get_multiple_captions(self, urls: List[str], topics: Dict[str, str] = None) -> List[ReelCaptionData]:
+        """Get captions for multiple reel URLs with topic tracking"""
         results = []
+        topics = topics or {}
+        
         for url in urls:
-            data = await self.get_reel_caption(url)
+            # Find topic for this URL
+            topic = ""
+            for t, topic_urls in topics.items():
+                if url in topic_urls:
+                    topic = t
+                    break
+            
+            data = await self.get_reel_caption(url, topic)
             if data:
                 results.append(data)
             await asyncio.sleep(2)
         return results
 
 
+
+
+
+
+
+
+
+
 # Global instances
 extractor = None
-drive_reader = None
+drive_manager = None
 
 @app.on_event("startup")
 async def startup_event():
-    global extractor, drive_reader
+    global extractor, drive_manager
     
-    # Initialize Google Drive Reader
-    drive_reader = GoogleDriveReader()
-    logger.info("📁 Google Drive Reader initialized")
+    # Initialize Google Drive Manager
+    drive_manager = GoogleDriveManager()
+    logger.info("📁 Google Drive Manager initialized")
     
     # Initialize Caption Extractor
     extractor = InstagramCaptionExtractor(headless=True)
@@ -597,8 +787,8 @@ async def root():
             <p class="subtitle">Extract clean captions from Instagram Reels</p>
             
             <div class="drive-status">
-                📁 Reading from: <strong>Google Drive (Reel_Finder_Data/shared_reels.json)</strong>
-                <button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px; margin-left: 10px;" onclick="loadFromDrive()">📥 Load URLs from Drive</button>
+                📁 Saving to: <strong>Google Drive (Reel_Finder_Data/captions_data.json)</strong>
+                <br>📋 URLs from: <strong>Reel_Finder_Data/shared_reels.json</strong>
             </div>
             
             <div class="input-section">
@@ -606,13 +796,14 @@ async def root():
                 <textarea id="urls" placeholder="https://www.instagram.com/reel/DZvVnIdxMla/&#10;https://www.instagram.com/reel/DZszmLkhAdY/"></textarea>
                 
                 <div class="btn-group">
-                    <button class="btn" onclick="capture()" id="captureBtn">🔍 Capture Captions</button>
+                    <button class="btn" onclick="capture()" id="captureBtn">🔍 Capture & Save</button>
+                    <button class="btn btn-secondary" onclick="loadFromDrive()">📥 Load URLs from Drive</button>
                     <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
                 </div>
             </div>
             
             <div class="endpoint-box">
-                POST /capture • GET /capture?urls=url1,url2 • GET /drive-urls • GET /drive-topics
+                POST /capture • GET /capture?urls=url1,url2 • GET /drive-urls • GET /captions
             </div>
             
             <div id="results"></div>
@@ -657,6 +848,7 @@ async def root():
                             <div class="stats">
                                 <span class="stat">📊 Total: <strong>${data.count}</strong> reels</span>
                                 <span class="stat">📥 Captured: <strong>${data.captured}</strong></span>
+                                <span class="stat">💾 Saved to Drive: <strong>✅</strong></span>
                             </div>
                         `;
                         
@@ -667,6 +859,7 @@ async def root():
                                     <div><strong>#${i + 1}</strong> @${reel.username}</div>
                                     <div class="caption">${reel.caption}</div>
                                     <div class="meta">❤️ ${reel.likes} • 💬 ${reel.comments} • 🔗 <a href="${reel.url}" target="_blank" style="color:#4ade80;">${reel.shortcode}</a></div>
+                                    ${reel.topic ? `<div class="meta">📂 Topic: #${reel.topic}</div>` : ''}
                                     ${hashtags ? `<div class="hashtags">${hashtags}</div>` : ''}
                                 </div>
                             `;
@@ -680,7 +873,7 @@ async def root():
                     resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
                 } finally {
                     btn.disabled = false;
-                    btn.textContent = '🔍 Capture Captions';
+                    btn.textContent = '🔍 Capture & Save';
                 }
             }
             
@@ -716,11 +909,14 @@ async def root():
 
 @app.post("/capture")
 async def capture_captions(data: dict):
-    """Capture captions from multiple reel URLs"""
-    global extractor
+    """Capture captions from multiple reel URLs and save to Drive"""
+    global extractor, drive_manager
     
     if not extractor:
         raise HTTPException(status_code=503, detail="Extractor not initialized")
+    
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
     
     urls = data.get("urls", [])
     
@@ -734,14 +930,51 @@ async def capture_captions(data: dict):
         raise HTTPException(status_code=400, detail="No valid URLs provided")
     
     try:
-        results = await extractor.get_multiple_captions(urls)
-        captured = len(results)
+        # Get topics from shared data
+        shared_data = await drive_manager.load_shared_data()
+        topics_map = {}
+        if shared_data and shared_data.get("topics"):
+            for topic, reels in shared_data["topics"].items():
+                for reel in reels:
+                    if reel.get("url"):
+                        topics_map[reel["url"]] = topic
+        
+        # Capture captions
+        results = await extractor.get_multiple_captions(urls, topics_map)
+        
+        # Save to Google Drive
+        save_success = await drive_manager.save_captions_data(results)
+        
+        # Ensure all values are JSON serializable
+        serializable_results = []
+        for r in results:
+            try:
+                serializable_results.append(r.to_dict())
+            except Exception as e:
+                logger.warning(f"Error serializing reel {r.shortcode}: {e}")
+                serializable_results.append({
+                    "url": str(r.url),
+                    "shortcode": str(r.shortcode),
+                    "username": str(r.username),
+                    "caption": str(r.caption),
+                    "full_caption": str(r.full_caption),
+                    "likes": safe_int(r.likes),
+                    "comments": safe_int(r.comments),
+                    "views": safe_int(r.views),
+                    "timestamp": str(r.timestamp),
+                    "hashtags": [str(h) for h in r.hashtags] if r.hashtags else [],
+                    "mentioned_users": [str(m) for m in r.mentioned_users] if r.mentioned_users else [],
+                    "is_video": bool(r.is_video),
+                    "duration": safe_int(r.duration),
+                    "topic": str(r.topic)
+                })
         
         return {
             "success": True,
-            "count": len(results),
-            "captured": captured,
-            "reels": [r.to_dict() for r in results],
+            "count": len(serializable_results),
+            "captured": len(serializable_results),
+            "saved_to_drive": save_success,
+            "reels": serializable_results,
             "timestamp": datetime.now().isoformat()
         }
     except Exception as e:
@@ -757,14 +990,23 @@ async def capture_captions_get(urls: str = Query(..., description="Comma-separat
 @app.get("/drive-urls")
 async def get_drive_urls():
     """Get all URLs from Google Drive shared file"""
-    global drive_reader
+    global drive_manager
     
-    if not drive_reader:
-        raise HTTPException(status_code=503, detail="Drive reader not initialized")
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
     
     try:
-        urls = await drive_reader.get_all_urls()
-        topics = await drive_reader.get_topics()
+        shared_data = await drive_manager.load_shared_data()
+        
+        if not shared_data:
+            return {"success": False, "message": "No shared data found"}
+        
+        urls = []
+        topics = shared_data.get("topics", {})
+        for topic, reels in topics.items():
+            for reel in reels:
+                if isinstance(reel, dict) and reel.get("url"):
+                    urls.append(reel["url"])
         
         return {
             "success": True,
@@ -778,20 +1020,47 @@ async def get_drive_urls():
         logger.error(f"Drive read error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/drive-topics")
-async def get_drive_topics():
-    """Get all topics with their reels from Google Drive"""
-    global drive_reader
+@app.get("/captions")
+async def get_captions():
+    """Get saved captions from Google Drive"""
+    global drive_manager
     
-    if not drive_reader:
-        raise HTTPException(status_code=503, detail="Drive reader not initialized")
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
     
     try:
-        topics = await drive_reader.get_topics()
+        data = await drive_manager.load_captions_data()
+        
+        if not data:
+            return {"success": False, "message": "No captions data found"}
         
         return {
             "success": True,
-            "topics": topics,
+            "data": data,
+            "source": "google_drive",
+            "folder": f"{DRIVE_FOLDER_NAME}/{CAPTIONS_FILE_NAME}"
+        }
+    except Exception as e:
+        logger.error(f"Captions read error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/drive-topics")
+async def get_drive_topics():
+    """Get all topics with their reels from Google Drive"""
+    global drive_manager
+    
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
+    
+    try:
+        data = await drive_manager.load_shared_data()
+        
+        if not data:
+            return {"success": False, "message": "No shared data found"}
+        
+        return {
+            "success": True,
+            "topics": data.get("topics", {}),
             "source": "google_drive",
             "folder": f"{DRIVE_FOLDER_NAME}/{SHARED_FILE_NAME}"
         }
@@ -802,13 +1071,25 @@ async def get_drive_topics():
 @app.get("/drive-urls/{topic}")
 async def get_drive_urls_by_topic(topic: str):
     """Get URLs for a specific topic from Google Drive"""
-    global drive_reader
+    global drive_manager
     
-    if not drive_reader:
-        raise HTTPException(status_code=503, detail="Drive reader not initialized")
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
     
     try:
-        urls = await drive_reader.get_urls_by_topic(topic)
+        data = await drive_manager.load_shared_data()
+        
+        if not data:
+            return {"success": False, "message": "No shared data found"}
+        
+        topics = data.get("topics", {})
+        if topic not in topics:
+            return {"success": True, "topic": topic, "count": 0, "urls": []}
+        
+        urls = []
+        for reel in topics[topic]:
+            if isinstance(reel, dict) and reel.get("url"):
+                urls.append(reel["url"])
         
         return {
             "success": True,
@@ -827,9 +1108,9 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "Instagram Reel Caption Capture",
-        "version": "2.0.0",
+        "version": "3.0.0",
         "timestamp": datetime.now().isoformat(),
-        "drive_connected": drive_reader is not None and drive_reader.service is not None
+        "drive_connected": drive_manager is not None and drive_manager.service is not None
     }
 
 
