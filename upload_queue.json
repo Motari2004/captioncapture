@@ -1,0 +1,14 @@
+{
+  "pending": [],
+  "approved": [],
+  "rejected": [],
+  "uploaded": [],
+  "stats": {
+    "total_processed": 0,
+    "pending_count": 0,
+    "approved_count": 0,
+    "rejected_count": 0,
+    "uploaded_count": 0,
+    "last_updated": "2026-06-22T13:02:55.354288"
+  }
+}

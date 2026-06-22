@@ -86,6 +86,11 @@ def safe_float(value):
 
 
 @dataclass
+
+
+
+
+
 class ReelCaptionData:
     """Data structure for captured reel caption"""
     url: str
@@ -120,6 +125,123 @@ class ReelCaptionData:
             "duration": safe_int(self.duration),
             "topic": str(self.topic)
         }
+    
+    def to_youtube_format(self) -> Dict[str, str]:
+        """Convert caption data to YouTube-friendly format"""
+        # Generate clean title from caption
+        title = self._generate_title()
+        
+        # Generate description with proper formatting
+        description = self._generate_description()
+        
+        # Generate tags from hashtags
+        tags = [h for h in self.hashtags if h]
+        
+        return {
+            "title": title,
+            "description": description,
+            "tags": tags,
+            "shortcode": self.shortcode,
+            "username": self.username,
+            "topic": self.topic,
+            "url": self.url
+        }
+    
+    def _generate_title(self) -> str:
+        """Generate a clean YouTube title from caption"""
+        # Use clean caption as base
+        title = self.caption.strip()
+        
+        # Remove hashtags from title
+        title = re.sub(r'#\w+', '', title)
+        
+        # Remove @mentions
+        title = re.sub(r'@\w+', '', title)
+        
+        # Clean up extra whitespace
+        title = ' '.join(title.split())
+        
+        # If title is too short, use shortcode
+        if len(title) < 5:
+            title = f"Instagram Reel - {self.shortcode}"
+        
+        # If title is too long, truncate
+        if len(title) > 100:
+            title = title[:97] + "..."
+        
+        # Capitalize first letter
+        if title:
+            title = title[0].upper() + title[1:] if len(title) > 1 else title
+        
+        # Add topic if available
+        if self.topic and self.topic not in title:
+            # Check if topic is already in title
+            topic_lower = self.topic.lower()
+            title_lower = title.lower()
+            if topic_lower not in title_lower and topic_lower.replace('_', ' ') not in title_lower:
+                title = f"{title} - #{self.topic}"
+        
+        return title
+    
+    def _generate_description(self) -> str:
+        """Generate a clean YouTube description from caption data"""
+        # Start with the clean caption
+        description_parts = []
+        
+        # Add the caption (cleaned of hashtags and mentions for the main text)
+        clean_text = self.caption.strip()
+        # Remove hashtags from main text
+        clean_text = re.sub(r'#\w+', '', clean_text)
+        # Remove @mentions
+        clean_text = re.sub(r'@\w+', '', clean_text)
+        clean_text = ' '.join(clean_text.split())
+        
+        if clean_text and len(clean_text) > 3:
+            description_parts.append(clean_text)
+        
+        # Add hashtags separately if they exist
+        if self.hashtags:
+            hashtags_str = ' '.join(['#' + h for h in self.hashtags])
+            if hashtags_str:
+                description_parts.append("")
+                description_parts.append(hashtags_str)
+        
+        # Add metadata in a clean footer
+        description_parts.append("")
+        description_parts.append("---")
+        description_parts.append(f"📸 From: @{self.username}")
+        if self.topic:
+            description_parts.append(f"🏷️ Topic: #{self.topic}")
+        description_parts.append(f"🔗 Original: {self.url}")
+        description_parts.append(f"📊 {self.likes:,} likes • {self.comments:,} comments")
+        
+        # Join all parts with newlines
+        description = "\n".join(description_parts)
+        
+        # Clean up any double newlines
+        description = re.sub(r'\n{3,}', '\n\n', description)
+        
+        return description.strip()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class GoogleDriveManager:
@@ -130,39 +252,78 @@ class GoogleDriveManager:
         self.folder_id = self._get_or_create_folder()
     
     def _authenticate(self):
-        """Authenticate with Google Drive"""
+        """Authenticate with Google Drive - supports Render environment"""
         creds = None
         
-        # 1. Try environment token (Render)
+        # ============================================================
+        # 1. TRY ENVIRONMENT TOKEN (RENDER) - IMPROVED
+        # ============================================================
         token_json = os.environ.get('GOOGLE_DRIVE_TOKEN')
         if token_json:
+            logger.info("🔑 GOOGLE_DRIVE_TOKEN found in environment")
             try:
-                decoded_bytes = base64.b64decode(token_json)
+                # Try base64 decode first
                 try:
-                    creds = pickle.loads(decoded_bytes)
+                    decoded_bytes = base64.b64decode(token_json)
+                    token_str = decoded_bytes.decode('utf-8')
                 except:
+                    token_str = token_json
+                
+                # Try parsing as JSON
+                try:
+                    token_data = json.loads(token_str)
+                    
+                    # Check if it's a service account
+                    if 'client_email' in token_data and 'private_key' in token_data:
+                        from google.oauth2 import service_account
+                        creds = service_account.Credentials.from_service_account_info(
+                            token_data, scopes=SCOPES
+                        )
+                        logger.info("✅ Drive authenticated via service account")
+                        return build('drive', 'v3', credentials=creds)
+                    
+                    # Check if it's OAuth2 token
+                    elif 'token' in token_data or 'refresh_token' in token_data:
+                        creds = Credentials.from_authorized_user_info(token_data, SCOPES)
+                        logger.info("✅ Drive authenticated via OAuth2 token")
+                        return build('drive', 'v3', credentials=creds)
+                    
+                    # Check if it's a pickle (base64 encoded)
+                    else:
+                        try:
+                            creds = pickle.loads(base64.b64decode(token_json))
+                            logger.info("✅ Drive authenticated via pickle (base64)")
+                            return build('drive', 'v3', credentials=creds)
+                        except:
+                            pass
+                            
+                except json.JSONDecodeError:
+                    # Try as pickle directly
                     try:
-                        token_data = json.loads(decoded_bytes.decode('utf-8'))
-                        creds = Credentials.from_authorized_user_info(token_data, SCOPES)
+                        creds = pickle.loads(base64.b64decode(token_json))
+                        logger.info("✅ Drive authenticated via pickle")
+                        return build('drive', 'v3', credentials=creds)
                     except:
-                        token_data = json.loads(token_json)
-                        creds = Credentials.from_authorized_user_info(token_data, SCOPES)
-                logger.info("✅ Drive authenticated via GOOGLE_DRIVE_TOKEN")
-                return build('drive', 'v3', credentials=creds)
+                        pass
+                    
             except Exception as e:
                 logger.warning(f"GOOGLE_DRIVE_TOKEN failed: {e}")
         
-        # 2. Try local token file
+        # ============================================================
+        # 2. TRY LOCAL TOKEN FILE
+        # ============================================================
         if os.path.exists('drive_token.pickle'):
             try:
                 with open('drive_token.pickle', 'rb') as f:
                     creds = pickle.load(f)
                 logger.info("✅ Drive authenticated via drive_token.pickle")
                 return build('drive', 'v3', credentials=creds)
-            except:
-                pass
+            except Exception as e:
+                logger.warning(f"drive_token.pickle failed: {e}")
         
-        # 3. Try credentials.json
+        # ============================================================
+        # 3. TRY CREDENTIALS.JSON (LOCAL DEV ONLY)
+        # ============================================================
         if os.path.exists('credentials.json'):
             try:
                 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -172,10 +333,33 @@ class GoogleDriveManager:
                 with open('drive_token.pickle', 'wb') as f:
                     pickle.dump(creds, f)
                 return build('drive', 'v3', credentials=creds)
-            except:
-                pass
+            except Exception as e:
+                logger.warning(f"credentials.json auth failed: {e}")
         
-        logger.error("❌ No Drive credentials found")
+        # ============================================================
+        # 4. TRY SERVICE ACCOUNT FROM ENV (ALTERNATIVE)
+        # ============================================================
+        credentials_json = os.environ.get('GOOGLE_CREDENTIALS')
+        if credentials_json:
+            try:
+                try:
+                    credentials_data = json.loads(base64.b64decode(credentials_json).decode('utf-8'))
+                except:
+                    credentials_data = json.loads(credentials_json)
+                
+                if 'client_email' in credentials_data and 'private_key' in credentials_data:
+                    from google.oauth2 import service_account
+                    creds = service_account.Credentials.from_service_account_info(
+                        credentials_data, scopes=SCOPES
+                    )
+                    logger.info("✅ Drive authenticated via GOOGLE_CREDENTIALS")
+                    return build('drive', 'v3', credentials=creds)
+            except Exception as e:
+                logger.warning(f"GOOGLE_CREDENTIALS failed: {e}")
+        
+        logger.error("❌ No Drive credentials found!")
+        logger.info("📌 For Render: Set GOOGLE_DRIVE_TOKEN environment variable")
+        logger.info("📌 For local: Place credentials.json or drive_token.pickle in project folder")
         return None
     
     def _get_or_create_folder(self):
@@ -243,17 +427,18 @@ class GoogleDriveManager:
             return None
     
     async def save_captions_data(self, captions: List[ReelCaptionData]) -> bool:
-        """Save captions data to Google Drive"""
+        """Save captions data to Google Drive using BytesIO (no temp files)"""
         if not self.service or not self.folder_id:
             logger.error("No Drive service available")
             return False
         
         try:
-            # Prepare data
+            # Prepare data with YouTube-friendly format
             data = {
                 "timestamp": datetime.now().isoformat(),
                 "total_captures": len(captions),
                 "captions": [c.to_dict() for c in captions],
+                "youtube_ready": [c.to_youtube_format() for c in captions],
                 "url_mapping": {c.url: c.shortcode for c in captions},
                 "shortcode_mapping": {c.shortcode: c.url for c in captions},
                 "source": "caption_capture",
@@ -265,50 +450,47 @@ class GoogleDriveManager:
             results = self.service.files().list(q=query, fields="files(id)").execute()
             files = results.get('files', [])
             
-            # Create temporary file
-            import tempfile
+            # Create JSON content
             file_content = json.dumps(data, indent=2, ensure_ascii=False)
             
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as temp_file:
-                temp_file.write(file_content)
-                temp_path = temp_file.name
+            # Use BytesIO instead of temporary file
+            from googleapiclient.http import MediaIoBaseUpload
             
-            try:
-                media = MediaFileUpload(
-                    temp_path,
-                    mimetype='application/json',
-                    resumable=True
-                )
-                
-                if files:
-                    # Update existing file
-                    file_id = files[0]['id']
-                    logger.info(f"📤 Updating: {CAPTIONS_FILE_NAME}")
-                    self.service.files().update(
-                        fileId=file_id,
-                        media_body=media
-                    ).execute()
-                    logger.info(f"✅ Updated captions file: {CAPTIONS_FILE_NAME}")
-                else:
-                    # Create new file
-                    logger.info(f"📤 Creating: {CAPTIONS_FILE_NAME}")
-                    file_metadata = {
-                        'name': CAPTIONS_FILE_NAME,
-                        'parents': [self.folder_id],
-                        'description': f"Instagram Reel Captions - {datetime.now().strftime('%Y-%m-%d')}"
-                    }
-                    self.service.files().create(
-                        body=file_metadata,
-                        media_body=media
-                    ).execute()
-                    logger.info(f"✅ Created captions file: {CAPTIONS_FILE_NAME}")
-                
-                return True
-                
-            finally:
-                if os.path.exists(temp_path):
-                    os.unlink(temp_path)
-                    logger.debug(f"🗑️ Removed temp file: {temp_path}")
+            # Create a BytesIO object
+            file_stream = io.BytesIO(file_content.encode('utf-8'))
+            
+            # Create media upload
+            media = MediaIoBaseUpload(
+                file_stream,
+                mimetype='application/json',
+                resumable=True
+            )
+            
+            if files:
+                file_id = files[0]['id']
+                logger.info(f"📤 Updating: {CAPTIONS_FILE_NAME}")
+                self.service.files().update(
+                    fileId=file_id,
+                    media_body=media
+                ).execute()
+                logger.info(f"✅ Updated captions file: {CAPTIONS_FILE_NAME}")
+            else:
+                logger.info(f"📤 Creating: {CAPTIONS_FILE_NAME}")
+                file_metadata = {
+                    'name': CAPTIONS_FILE_NAME,
+                    'parents': [self.folder_id],
+                    'description': f"Instagram Reel Captions - {datetime.now().strftime('%Y-%m-%d')}"
+                }
+                self.service.files().create(
+                    body=file_metadata,
+                    media_body=media
+                ).execute()
+                logger.info(f"✅ Created captions file: {CAPTIONS_FILE_NAME}")
+            
+            # Close the stream
+            file_stream.close()
+            
+            return True
             
         except Exception as e:
             logger.error(f"Save to Drive error: {e}")
@@ -350,35 +532,91 @@ class GoogleDriveManager:
         except Exception as e:
             logger.error(f"Load from Drive error: {e}")
             return None
+    
+    async def get_caption_by_shortcode(self, shortcode: str) -> Optional[Dict]:
+        """Get caption data for a specific shortcode"""
+        data = await self.load_captions_data()
+        if not data:
+            return None
+        
+        captions = data.get('captions', [])
+        for caption in captions:
+            if caption.get('shortcode') == shortcode:
+                return caption
+        return None
+    
+    async def get_youtube_ready_by_shortcode(self, shortcode: str) -> Optional[Dict]:
+        """Get YouTube-ready format for a specific shortcode"""
+        data = await self.load_captions_data()
+        if not data:
+            return None
+        
+        youtube_ready = data.get('youtube_ready', [])
+        for item in youtube_ready:
+            if item.get('shortcode') == shortcode:
+                return item
+        return None
 
 
+# ============================================================
+# HEALTH CHECK ENDPOINT WITH DRIVE STATUS
+# ============================================================
+@app.get("/health")
+async def health_check():
+    """Health check endpoint with detailed status"""
+    global drive_manager, extractor
+    
+    drive_status = {
+        "connected": drive_manager is not None and drive_manager.service is not None,
+        "folder_id": drive_manager.folder_id if drive_manager else None,
+        "folder_name": DRIVE_FOLDER_NAME if drive_manager else None
+    }
+    
+    return {
+        "status": "healthy",
+        "service": "Instagram Reel Caption Capture",
+        "version": "3.0.0",
+        "timestamp": datetime.now().isoformat(),
+        "drive": drive_status,
+        "extractor_ready": extractor is not None and extractor.page is not None,
+        "environment": {
+            "has_drive_token": bool(os.environ.get('GOOGLE_DRIVE_TOKEN')),
+            "has_credentials": bool(os.environ.get('GOOGLE_CREDENTIALS')),
+            "render_env": bool(os.environ.get('RENDER'))
+        }
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ============================================================
+# TEST DRIVE CONNECTION ENDPOINT
+# ============================================================
+@app.get("/test-drive")
+async def test_drive():
+    """Test Google Drive connection"""
+    global drive_manager
+    
+    if not drive_manager:
+        return {"success": False, "message": "Drive manager not initialized"}
+    
+    if not drive_manager.service:
+        return {"success": False, "message": "Drive service not authenticated"}
+    
+    try:
+        # Try to list files as a test
+        results = drive_manager.service.files().list(
+            pageSize=1,
+            fields="files(id, name)"
+        ).execute()
+        
+        return {
+            "success": True,
+            "message": "Google Drive connection successful",
+            "folder_id": drive_manager.folder_id,
+            "folder_name": DRIVE_FOLDER_NAME,
+            "files_found": len(results.get('files', []))
+        }
+    except Exception as e:
+        return {"success": False, "message": f"Drive test failed: {str(e)}"}
 
 
 class InstagramCaptionExtractor:
@@ -672,25 +910,32 @@ class InstagramCaptionExtractor:
         return results
 
 
-
-
-
-
-
-
-
-
 # Global instances
 extractor = None
 drive_manager = None
 
+
+# ============================================================
+# STARTUP AND SHUTDOWN
+# ============================================================
 @app.on_event("startup")
 async def startup_event():
     global extractor, drive_manager
     
+    logger.info("🚀 Starting up...")
+    
+    # Check for Drive token
+    if os.environ.get('GOOGLE_DRIVE_TOKEN'):
+        logger.info("✅ GOOGLE_DRIVE_TOKEN found in environment")
+    else:
+        logger.warning("⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth")
+    
     # Initialize Google Drive Manager
     drive_manager = GoogleDriveManager()
-    logger.info("📁 Google Drive Manager initialized")
+    if drive_manager.service:
+        logger.info("📁 Google Drive Manager initialized successfully")
+    else:
+        logger.error("❌ Google Drive Manager initialization failed")
     
     # Initialize Caption Extractor
     extractor = InstagramCaptionExtractor(headless=True)
@@ -705,9 +950,9 @@ async def shutdown_event():
         logger.info("🔚 Browser closed")
 
 
-# -----------------------------
-# Routes
-# -----------------------------
+# ============================================================
+# ROUTES
+# ============================================================
 @app.get("/")
 async def root():
     return HTMLResponse("""
@@ -789,6 +1034,7 @@ async def root():
             <div class="drive-status">
                 📁 Saving to: <strong>Google Drive (Reel_Finder_Data/captions_data.json)</strong>
                 <br>📋 URLs from: <strong>Reel_Finder_Data/shared_reels.json</strong>
+                <br>🎬 YouTube-ready format included: <strong>title, description, tags</strong>
             </div>
             
             <div class="input-section">
@@ -803,13 +1049,14 @@ async def root():
             </div>
             
             <div class="endpoint-box">
-                POST /capture • GET /capture?urls=url1,url2 • GET /drive-urls • GET /captions
+                POST /capture • GET /capture?urls=url1,url2 • GET /drive-urls • GET /captions • GET /youtube-ready
             </div>
             
             <div id="results"></div>
             
             <div class="footer">
                 Powered by Playwright • Google Drive • FastAPI
+                <br>YouTube-ready titles and descriptions included
             </div>
         </div>
         
@@ -849,11 +1096,13 @@ async def root():
                                 <span class="stat">📊 Total: <strong>${data.count}</strong> reels</span>
                                 <span class="stat">📥 Captured: <strong>${data.captured}</strong></span>
                                 <span class="stat">💾 Saved to Drive: <strong>✅</strong></span>
+                                <span class="stat">🎬 YouTube-ready: <strong>✅</strong></span>
                             </div>
                         `;
                         
                         data.reels.forEach((reel, i) => {
                             const hashtags = reel.hashtags ? reel.hashtags.map(h => '#' + h).join(' ') : '';
+                            const youtube_title = data.youtube_ready && data.youtube_ready[i] ? data.youtube_ready[i].title : reel.caption;
                             html += `
                                 <div class="result-item">
                                     <div><strong>#${i + 1}</strong> @${reel.username}</div>
@@ -861,6 +1110,7 @@ async def root():
                                     <div class="meta">❤️ ${reel.likes} • 💬 ${reel.comments} • 🔗 <a href="${reel.url}" target="_blank" style="color:#4ade80;">${reel.shortcode}</a></div>
                                     ${reel.topic ? `<div class="meta">📂 Topic: #${reel.topic}</div>` : ''}
                                     ${hashtags ? `<div class="hashtags">${hashtags}</div>` : ''}
+                                    ${youtube_title ? `<div class="meta" style="color:#ff0000;">🎬 YouTube Title: ${youtube_title}</div>` : ''}
                                 </div>
                             `;
                         });
@@ -942,6 +1192,9 @@ async def capture_captions(data: dict):
         # Capture captions
         results = await extractor.get_multiple_captions(urls, topics_map)
         
+        # Convert to YouTube-ready format for response
+        youtube_ready = [r.to_youtube_format() for r in results]
+        
         # Save to Google Drive
         save_success = await drive_manager.save_captions_data(results)
         
@@ -975,6 +1228,7 @@ async def capture_captions(data: dict):
             "captured": len(serializable_results),
             "saved_to_drive": save_success,
             "reels": serializable_results,
+            "youtube_ready": youtube_ready,
             "timestamp": datetime.now().isoformat()
         }
     except Exception as e:
@@ -1044,6 +1298,59 @@ async def get_captions():
         logger.error(f"Captions read error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/youtube-ready")
+async def get_youtube_ready_captions():
+    """Get YouTube-ready captions with titles and descriptions"""
+    global drive_manager
+    
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
+    
+    try:
+        data = await drive_manager.load_captions_data()
+        
+        if not data:
+            return {"success": False, "message": "No captions data found"}
+        
+        # Return the YouTube-ready format
+        return {
+            "success": True,
+            "youtube_ready": data.get("youtube_ready", []),
+            "total": len(data.get("youtube_ready", [])),
+            "source": "google_drive",
+            "folder": f"{DRIVE_FOLDER_NAME}/{CAPTIONS_FILE_NAME}"
+        }
+    except Exception as e:
+        logger.error(f"Youtube ready error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/caption/{shortcode}")
+async def get_caption_by_shortcode(shortcode: str):
+    """Get caption for a specific shortcode"""
+    global drive_manager
+    
+    if not drive_manager:
+        raise HTTPException(status_code=503, detail="Drive manager not initialized")
+    
+    try:
+        caption = await drive_manager.get_caption_by_shortcode(shortcode)
+        
+        if not caption:
+            return {"success": False, "message": f"No caption found for shortcode: {shortcode}"}
+        
+        # Get YouTube-ready format too
+        youtube_ready = await drive_manager.get_youtube_ready_by_shortcode(shortcode)
+        
+        return {
+            "success": True,
+            "caption": caption,
+            "youtube_ready": youtube_ready,
+            "shortcode": shortcode
+        }
+    except Exception as e:
+        logger.error(f"Caption fetch error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/drive-topics")
 async def get_drive_topics():
     """Get all topics with their reels from Google Drive"""
@@ -1103,17 +1410,21 @@ async def get_drive_urls_by_topic(topic: str):
         logger.error(f"Drive read error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "service": "Instagram Reel Caption Capture",
-        "version": "3.0.0",
-        "timestamp": datetime.now().isoformat(),
-        "drive_connected": drive_manager is not None and drive_manager.service is not None
-    }
 
-
+# ============================================================
+# MAIN ENTRY POINT
+# ============================================================
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
+    
+    print(f"\n{'='*50}")
+    print(f"🚀 Instagram Reel Caption Capture v3.0")
+    print(f"{'='*50}")
+    print(f"🌐 Server: http://0.0.0.0:{port}")
+    print(f"📁 Drive folder: {DRIVE_FOLDER_NAME}")
+    print(f"📄 Shared file: {SHARED_FILE_NAME}")
+    print(f"📄 Captions file: {CAPTIONS_FILE_NAME}")
+    print(f"🎬 YouTube-ready format: Included")
+    print(f"{'='*50}\n")
+    
     uvicorn.run(app, host="0.0.0.0", port=port)

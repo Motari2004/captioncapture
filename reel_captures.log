@@ -198,3 +198,396 @@ Exception: Connection.init: Connection closed while reading from the driver
 2026-06-20 16:47:21,210 - INFO - ✅ Loaded shared data with 6 URLs
 2026-06-20 16:48:08,713 - INFO - 🔚 Browser closed
 2026-06-20 16:48:08,714 - INFO - 🔚 Browser closed
+2026-06-20 16:56:57,425 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 16:56:57,429 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 16:56:59,894 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 16:56:59,894 - INFO - 📁 Google Drive Manager initialized
+2026-06-20 16:57:01,743 - INFO - ✅ Browser initialized
+2026-06-20 16:57:01,743 - INFO - 🚀 Caption extractor initialized
+2026-06-20 16:57:09,759 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 16:57:10,274 - INFO - Download progress: 100%
+2026-06-20 16:57:10,274 - INFO - ✅ Loaded shared data with 9 URLs
+2026-06-20 16:59:28,021 - INFO - 🚀 Starting up...
+2026-06-20 16:59:28,021 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-20 16:59:28,022 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 16:59:28,027 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 16:59:30,260 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 16:59:30,260 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-20 17:01:58,251 - INFO - 🚀 Starting up...
+2026-06-20 17:01:58,252 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-20 17:01:58,252 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 17:01:58,256 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 17:02:00,283 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 17:02:00,299 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-20 17:02:01,362 - INFO - ✅ Browser initialized
+2026-06-20 17:02:01,362 - INFO - 🚀 Caption extractor initialized
+2026-06-20 17:02:12,671 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:02:13,704 - INFO - Download progress: 100%
+2026-06-20 17:02:13,704 - INFO - ✅ Loaded shared data with 9 URLs
+2026-06-20 17:25:39,640 - INFO - 🚀 Starting up...
+2026-06-20 17:25:39,641 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-20 17:25:39,641 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 17:25:39,648 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 17:25:42,718 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 17:25:42,718 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-20 17:25:44,329 - INFO - ✅ Browser initialized
+2026-06-20 17:25:44,329 - INFO - 🚀 Caption extractor initialized
+2026-06-20 17:25:44,332 - INFO - 📋 Captured URLs tracker initialized: 0 URLs captured
+2026-06-20 17:25:44,333 - INFO - 🔄 Auto-polling started - checking Drive every 120 seconds
+2026-06-20 17:25:44,333 - INFO - 🔄 Auto-polling started - checking Drive every 120 seconds
+2026-06-20 17:25:44,971 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:25:46,022 - INFO - Download progress: 100%
+2026-06-20 17:25:46,022 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:25:46,026 - INFO - 🆕 Found 6 new URLs to capture
+2026-06-20 17:25:46,026 - INFO - 📥 Fetching: DToB3Wrkk0l
+2026-06-20 17:26:12,514 - INFO - 📥 Fetching: DZFv7cKINvD
+2026-06-20 17:26:24,602 - INFO - 📥 Fetching: DWg7rH4CPta
+2026-06-20 17:26:37,735 - INFO - 📥 Fetching: BytH3SGBrx6
+2026-06-20 17:26:38,954 - ERROR - ❌ Error fetching BytH3SGBrx6: Page.goto: net::ERR_NETWORK_IO_SUSPENDED at https://www.instagram.com/reel/BytH3SGBrx6/
+Call log:
+  - navigating to "https://www.instagram.com/reel/BytH3SGBrx6/", waiting until "load"
+
+2026-06-20 17:26:40,979 - INFO - 📥 Fetching: DZtO-jKpQZD
+2026-06-20 17:26:40,993 - ERROR - ❌ Error fetching DZtO-jKpQZD: Page.goto: net::ERR_NETWORK_IO_SUSPENDED at https://www.instagram.com/reel/DZtO-jKpQZD/
+Call log:
+  - navigating to "https://www.instagram.com/reel/DZtO-jKpQZD/", waiting until "load"
+
+2026-06-20 17:26:43,014 - INFO - 📥 Fetching: DZs9yhuisDw
+2026-06-20 17:26:43,843 - ERROR - ❌ Error fetching DZs9yhuisDw: Page.goto: net::ERR_NETWORK_IO_SUSPENDED at https://www.instagram.com/reel/DZs9yhuisDw/
+Call log:
+  - navigating to "https://www.instagram.com/reel/DZs9yhuisDw/", waiting until "load"
+
+2026-06-20 17:26:51,917 - ERROR - Save to Drive error: [Errno 11001] getaddrinfo failed
+2026-06-20 17:26:52,959 - ERROR - ❌ Failed to save captions to Drive
+2026-06-20 17:28:49,365 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:28:50,106 - INFO - Download progress: 100%
+2026-06-20 17:28:50,108 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:28:55,632 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:28:56,113 - INFO - Download progress: 100%
+2026-06-20 17:28:56,114 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:28:56,116 - INFO - 🆕 Found 6 new URLs to capture
+2026-06-20 17:28:56,117 - INFO - 📥 Fetching: DToB3Wrkk0l
+2026-06-20 17:29:14,866 - INFO - 📥 Fetching: DZFv7cKINvD
+2026-06-20 17:29:27,403 - INFO - 📥 Fetching: DWg7rH4CPta
+2026-06-20 17:29:30,012 - ERROR - ❌ Error fetching DWg7rH4CPta: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://www.instagram.com/reel/DWg7rH4CPta/", waiting until "load"
+
+2026-06-20 17:29:30,169 - INFO - 🔄 Auto-polling stopped
+2026-06-20 17:29:30,169 - INFO - 🔄 Auto-polling stopped
+2026-06-20 17:29:49,787 - INFO - 🚀 Starting up...
+2026-06-20 17:29:49,789 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-20 17:29:49,789 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 17:29:49,795 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 17:29:52,602 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 17:29:52,602 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-20 17:29:54,015 - INFO - ✅ Browser initialized
+2026-06-20 17:29:54,015 - INFO - 🚀 Caption extractor initialized
+2026-06-20 17:29:54,018 - INFO - 📋 Captured URLs tracker initialized: 0 URLs captured
+2026-06-20 17:29:54,018 - INFO - 🔄 Auto-polling started - checking Drive every 120 seconds
+2026-06-20 17:29:54,021 - INFO - 🔄 Auto-polling started - checking Drive every 120 seconds
+2026-06-20 17:29:54,465 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:29:54,957 - INFO - Download progress: 100%
+2026-06-20 17:29:54,957 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:29:54,960 - INFO - 🆕 Found 6 new URLs to capture
+2026-06-20 17:29:54,960 - INFO - 📥 Fetching: DToB3Wrkk0l
+2026-06-20 17:30:14,335 - INFO - 📥 Fetching: DZFv7cKINvD
+2026-06-20 17:30:32,771 - INFO - 📥 Fetching: DWg7rH4CPta
+2026-06-20 17:30:47,522 - INFO - 📥 Fetching: BytH3SGBrx6
+2026-06-20 17:31:00,736 - INFO - 📥 Fetching: DZtO-jKpQZD
+2026-06-20 17:31:14,995 - INFO - 📥 Fetching: DZs9yhuisDw
+2026-06-20 17:31:25,705 - INFO - 📤 Updating: captions_data.json
+2026-06-20 17:31:28,115 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-20 17:31:28,117 - INFO - ✅ Captured 6 new reels (total: 6)
+2026-06-20 17:31:28,118 - INFO -    📹 DToB3Wrkk0l - @www.instagram.com - 
+2026-06-20 17:31:28,118 - INFO -    📹 DZFv7cKINvD - @www.instagram.com - 
+2026-06-20 17:31:28,120 - INFO -    📹 DWg7rH4CPta - @www.instagram.com - 
+2026-06-20 17:31:28,120 - INFO -    📹 BytH3SGBrx6 - @www.instagram.com - 
+2026-06-20 17:31:28,121 - INFO -    📹 DZtO-jKpQZD - @www.instagram.com - 
+2026-06-20 17:31:28,122 - INFO -    📹 DZs9yhuisDw - @www.instagram.com - 
+2026-06-20 17:33:30,854 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:33:31,730 - INFO - Download progress: 100%
+2026-06-20 17:33:31,733 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:33:31,739 - INFO - ✅ No new URLs found (total: 6, captured: 6)
+2026-06-20 17:35:33,531 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:35:34,417 - INFO - Download progress: 100%
+2026-06-20 17:35:34,417 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:35:34,419 - INFO - ✅ No new URLs found (total: 6, captured: 6)
+2026-06-20 17:37:36,333 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:37:37,156 - INFO - Download progress: 100%
+2026-06-20 17:37:37,157 - INFO - ✅ Loaded shared data with 6 URLs
+2026-06-20 17:37:37,160 - INFO - ✅ No new URLs found (total: 6, captured: 6)
+2026-06-20 17:39:39,451 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:39:40,957 - INFO - Download progress: 100%
+2026-06-20 17:39:40,958 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 17:39:40,959 - INFO - 🆕 Found 3 new URLs to capture
+2026-06-20 17:39:40,960 - INFO - 📥 Fetching: DZwGoFTCl4T
+2026-06-20 17:40:01,494 - ERROR - ❌ Error fetching DZwGoFTCl4T: Timeout 10000ms exceeded.
+2026-06-20 17:40:03,517 - INFO - 📥 Fetching: DZvH374JVv2
+2026-06-20 17:40:23,383 - ERROR - ❌ Error fetching DZvH374JVv2: Timeout 10000ms exceeded.
+2026-06-20 17:40:25,388 - INFO - 📥 Fetching: DZNZxDglVgd
+2026-06-20 17:40:38,344 - ERROR - ❌ Error fetching DZNZxDglVgd: Timeout 10000ms exceeded.
+2026-06-20 17:40:40,355 - WARNING - No captions captured from new URLs
+2026-06-20 17:42:01,422 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:42:02,506 - INFO - Download progress: 100%
+2026-06-20 17:42:02,507 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 17:42:12,366 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:42:13,207 - INFO - Download progress: 100%
+2026-06-20 17:42:13,208 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 17:42:13,209 - INFO - 📥 Fetching: DZwGoFTCl4T
+2026-06-20 17:42:29,618 - ERROR - ❌ Error fetching DZwGoFTCl4T: Timeout 10000ms exceeded.
+2026-06-20 17:42:31,616 - INFO - 📥 Fetching: DZvH374JVv2
+2026-06-20 17:42:44,928 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:42:46,190 - INFO - Download progress: 100%
+2026-06-20 17:42:46,190 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 17:42:46,192 - INFO - 🆕 Found 3 new URLs to capture
+2026-06-20 17:42:46,194 - INFO - 📥 Fetching: DZwGoFTCl4T
+2026-06-20 17:42:57,576 - ERROR - ❌ Error fetching DZvH374JVv2: Timeout 10000ms exceeded.
+2026-06-20 17:42:57,577 - ERROR - ❌ Error fetching DZwGoFTCl4T: Timeout 10000ms exceeded.
+2026-06-20 17:42:59,574 - INFO - 📥 Fetching: DZvH374JVv2
+2026-06-20 17:42:59,577 - INFO - 📥 Fetching: DZNZxDglVgd
+2026-06-20 17:42:59,596 - ERROR - ❌ Error fetching DZvH374JVv2: Page.goto: net::ERR_ABORTED at https://www.instagram.com/reel/DZvH374JVv2/
+Call log:
+  - navigating to "https://www.instagram.com/reel/DZvH374JVv2/", waiting until "load"
+
+2026-06-20 17:43:01,585 - INFO - 📥 Fetching: DZNZxDglVgd
+2026-06-20 17:43:11,334 - ERROR - ❌ Error fetching DZNZxDglVgd: Timeout 10000ms exceeded.
+=========================== logs ===========================
+"commit" event fired
+"domcontentloaded" event fired
+"load" event fired
+============================================================
+2026-06-20 17:43:12,800 - ERROR - ❌ Error fetching DZNZxDglVgd: Timeout 10000ms exceeded.
+2026-06-20 17:43:14,810 - WARNING - No captions captured from new URLs
+2026-06-20 17:43:29,435 - INFO - 🔄 Auto-polling stopped
+2026-06-20 17:43:29,435 - INFO - 🔄 Auto-polling stopped
+2026-06-20 17:43:35,853 - INFO - 🚀 Starting up...
+2026-06-20 17:43:35,853 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-20 17:43:35,853 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-20 17:43:35,857 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-20 17:43:37,935 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-20 17:43:37,935 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-20 17:43:38,807 - INFO - ✅ Browser initialized
+2026-06-20 17:43:38,807 - INFO - 🚀 Caption extractor initialized
+2026-06-20 17:43:49,079 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:43:49,951 - INFO - Download progress: 100%
+2026-06-20 17:43:49,952 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 17:43:52,058 - INFO - 📥 Downloading: shared_reels.json
+2026-06-20 17:43:53,054 - INFO - Download progress: 100%
+2026-06-20 17:43:53,054 - INFO - ✅ Loaded shared data with 3 URLs
+2026-06-20 17:43:53,055 - INFO - 📥 Fetching: DZwGoFTCl4T
+2026-06-20 17:44:09,419 - INFO - 📥 Fetching: DZvH374JVv2
+2026-06-20 17:44:31,258 - INFO - 📥 Fetching: DZNZxDglVgd
+2026-06-20 17:44:45,794 - INFO - 📤 Updating: captions_data.json
+2026-06-20 17:44:48,242 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:14:32,862 - INFO - 🚀 Starting up...
+2026-06-22 13:14:32,863 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-22 13:14:32,863 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-22 13:14:32,866 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-22 13:14:35,430 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-22 13:14:35,430 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-22 13:14:36,539 - INFO - ✅ Browser initialized
+2026-06-22 13:14:36,539 - INFO - 🚀 Caption extractor initialized
+2026-06-22 13:14:48,276 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:14:48,833 - INFO - Download progress: 100%
+2026-06-22 13:14:48,833 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:19:12,229 - INFO - 🚀 Starting up...
+2026-06-22 13:19:12,229 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-22 13:19:12,230 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-22 13:19:12,234 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-22 13:19:14,841 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-22 13:19:14,842 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-22 13:19:15,595 - INFO - ✅ Browser initialized
+2026-06-22 13:19:15,596 - INFO - 🚀 Caption extractor initialized
+2026-06-22 13:19:37,784 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:19:38,453 - INFO - Download progress: 100%
+2026-06-22 13:19:38,453 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:20:51,666 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:20:52,468 - INFO - Download progress: 100%
+2026-06-22 13:20:52,468 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:20:54,627 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:20:55,227 - INFO - Download progress: 100%
+2026-06-22 13:20:55,227 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:20:55,228 - INFO - 📥 Fetching: DW7Bg0Vj0DG
+2026-06-22 13:21:10,076 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:21:12,428 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:37:06,053 - INFO - 🚀 Starting up...
+2026-06-22 13:37:06,058 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-22 13:37:06,060 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-22 13:37:06,069 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-22 13:37:09,007 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-22 13:37:09,007 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-22 13:37:11,024 - INFO - ✅ Browser initialized
+2026-06-22 13:37:11,024 - INFO - 🚀 Caption extractor initialized
+2026-06-22 13:37:38,568 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:37:39,047 - INFO - Download progress: 100%
+2026-06-22 13:37:39,048 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:37:41,100 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:37:41,541 - INFO - Download progress: 100%
+2026-06-22 13:37:41,541 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:37:41,542 - INFO - 📥 Fetching: DWbk9qakY93
+2026-06-22 13:37:58,632 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:38:00,851 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:41:15,313 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:41:15,788 - INFO - Download progress: 100%
+2026-06-22 13:41:15,788 - INFO - ✅ Loaded shared data with 2 URLs
+2026-06-22 13:41:42,007 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:41:42,479 - INFO - Download progress: 100%
+2026-06-22 13:41:42,479 - INFO - ✅ Loaded shared data with 2 URLs
+2026-06-22 13:41:42,481 - INFO - 📥 Fetching: DWbk9qakY93
+2026-06-22 13:41:55,258 - ERROR - ❌ Error fetching DWbk9qakY93: Timeout 10000ms exceeded.
+2026-06-22 13:42:04,996 - INFO - 📥 Fetching: DZXiInERMmF
+2026-06-22 13:42:17,139 - ERROR - ❌ Error fetching DZXiInERMmF: Timeout 10000ms exceeded.
+2026-06-22 13:42:19,608 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:42:21,748 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:42:26,839 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:42:27,350 - INFO - Download progress: 100%
+2026-06-22 13:42:27,350 - INFO - ✅ Loaded shared data with 2 URLs
+2026-06-22 13:42:29,328 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:42:29,792 - INFO - Download progress: 100%
+2026-06-22 13:42:29,792 - INFO - ✅ Loaded shared data with 2 URLs
+2026-06-22 13:42:29,793 - INFO - 📥 Fetching: DWbk9qakY93
+2026-06-22 13:42:40,390 - INFO - 📥 Fetching: DZXiInERMmF
+2026-06-22 13:42:48,807 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:42:51,143 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:44:59,767 - ERROR - Load from Drive error: EOF occurred in violation of protocol (_ssl.c:2406)
+2026-06-22 13:45:15,501 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:45:16,024 - INFO - Download progress: 100%
+2026-06-22 13:45:16,024 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:45:23,364 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:45:23,840 - INFO - Download progress: 100%
+2026-06-22 13:45:23,841 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:45:23,842 - INFO - 📥 Fetching: DPDbsGAjRhk
+2026-06-22 13:45:41,031 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:45:43,536 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:47:04,965 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:05,425 - INFO - Download progress: 100%
+2026-06-22 13:47:05,425 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:10,586 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:11,037 - INFO - Download progress: 100%
+2026-06-22 13:47:11,037 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:13,598 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:14,063 - INFO - Download progress: 100%
+2026-06-22 13:47:14,063 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:16,617 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:17,075 - INFO - Download progress: 100%
+2026-06-22 13:47:17,076 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:18,296 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:18,738 - INFO - Download progress: 100%
+2026-06-22 13:47:18,738 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:20,173 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:20,655 - INFO - Download progress: 100%
+2026-06-22 13:47:20,655 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:21,680 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:22,166 - INFO - Download progress: 100%
+2026-06-22 13:47:22,167 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:47:23,705 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:47:24,193 - INFO - Download progress: 100%
+2026-06-22 13:47:24,194 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:48:17,526 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:48:18,735 - INFO - Download progress: 100%
+2026-06-22 13:48:18,735 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:48:35,194 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:48:35,667 - INFO - Download progress: 100%
+2026-06-22 13:48:35,667 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:48:36,712 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:48:37,164 - INFO - Download progress: 100%
+2026-06-22 13:48:37,164 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:48:37,164 - INFO - 📥 Fetching: DQ4oxzAjGuP
+2026-06-22 13:48:49,580 - ERROR - ❌ Error fetching DQ4oxzAjGuP: Timeout 10000ms exceeded.
+2026-06-22 13:48:51,941 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:48:54,440 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:48:57,405 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:48:57,870 - INFO - Download progress: 100%
+2026-06-22 13:48:57,870 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:48:59,699 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:49:00,134 - INFO - Download progress: 100%
+2026-06-22 13:49:00,134 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:49:00,135 - INFO - 📥 Fetching: DQ4oxzAjGuP
+2026-06-22 13:49:11,754 - ERROR - ❌ Error fetching DQ4oxzAjGuP: Timeout 10000ms exceeded.
+2026-06-22 13:49:14,214 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:49:16,649 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:49:20,121 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:49:20,590 - INFO - Download progress: 100%
+2026-06-22 13:49:20,590 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:49:21,115 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:49:21,572 - INFO - Download progress: 100%
+2026-06-22 13:49:21,573 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:49:21,574 - INFO - 📥 Fetching: DQ4oxzAjGuP
+2026-06-22 13:49:38,336 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:49:40,924 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 13:54:37,510 - INFO - 🚀 Starting up...
+2026-06-22 13:54:37,522 - WARNING - ⚠️ GOOGLE_DRIVE_TOKEN not set - will try local auth
+2026-06-22 13:54:37,523 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-22 13:54:37,530 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-22 13:54:39,560 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-22 13:54:39,560 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-22 13:54:40,538 - INFO - ✅ Browser initialized
+2026-06-22 13:54:40,538 - INFO - 🚀 Caption extractor initialized
+2026-06-22 13:55:47,434 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:55:48,436 - INFO - Download progress: 100%
+2026-06-22 13:55:48,436 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:55:50,329 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 13:55:51,268 - INFO - Download progress: 100%
+2026-06-22 13:55:51,269 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 13:55:51,270 - INFO - 📥 Fetching: DW8bPjGAPq1
+2026-06-22 13:56:03,403 - INFO - 📤 Updating: captions_data.json
+2026-06-22 13:56:06,043 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:03:37,238 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:03:38,245 - INFO - Download progress: 100%
+2026-06-22 14:03:38,245 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:03:40,917 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:03:41,728 - INFO - Download progress: 100%
+2026-06-22 14:03:41,728 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:03:41,730 - INFO - 📥 Fetching: DWbk9qakY93
+2026-06-22 14:03:57,503 - INFO - 📤 Updating: captions_data.json
+2026-06-22 14:04:00,411 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:05:31,468 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:05:32,490 - INFO - Download progress: 100%
+2026-06-22 14:05:32,491 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:05:33,786 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:05:34,731 - INFO - Download progress: 100%
+2026-06-22 14:05:34,732 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:05:34,733 - INFO - 📥 Fetching: DZy9trDzlV3
+2026-06-22 14:05:49,920 - INFO - 📤 Updating: captions_data.json
+2026-06-22 14:05:52,582 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:12:04,033 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:12:05,348 - INFO - Download progress: 100%
+2026-06-22 14:12:05,349 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:14:10,381 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:14:11,568 - INFO - Download progress: 100%
+2026-06-22 14:14:11,569 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:14:11,571 - INFO - 📥 Fetching: C-sX_3ZMT-5
+2026-06-22 14:14:27,775 - INFO - 📤 Updating: captions_data.json
+2026-06-22 14:14:30,600 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:20:15,730 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:20:16,914 - INFO - Download progress: 100%
+2026-06-22 14:20:16,914 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:20:18,472 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:20:19,496 - INFO - Download progress: 100%
+2026-06-22 14:20:19,496 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:20:19,497 - INFO - 📥 Fetching: DZ2LdgNCEkz
+2026-06-22 14:20:32,249 - INFO - 📤 Updating: captions_data.json
+2026-06-22 14:20:35,946 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:26:30,727 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:26:32,707 - INFO - Download progress: 100%
+2026-06-22 14:26:32,707 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:26:34,965 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:26:36,108 - INFO - Download progress: 100%
+2026-06-22 14:26:36,108 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:26:40,406 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:26:41,614 - INFO - Download progress: 100%
+2026-06-22 14:26:41,614 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:26:41,615 - INFO - 📥 Fetching: DNm6NrEhUim
+2026-06-22 14:26:53,493 - ERROR - ❌ Error fetching DNm6NrEhUim: Timeout 10000ms exceeded.
+2026-06-22 14:26:56,122 - INFO - 📤 Updating: captions_data.json
+2026-06-22 14:26:59,222 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:27:02,506 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:27:04,569 - INFO - Download progress: 100%
+2026-06-22 14:27:04,569 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:27:07,576 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:27:08,721 - INFO - Download progress: 100%
+2026-06-22 14:27:08,722 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:27:08,723 - INFO - 📥 Fetching: DNm6NrEhUim
+2026-06-22 14:27:17,698 - INFO - 📤 Updating: captions_data.json
+2026-06-22 14:27:20,975 - INFO - ✅ Updated captions file: captions_data.json
