@@ -591,3 +591,196 @@ Call log:
 2026-06-22 14:27:08,723 - INFO - 📥 Fetching: DNm6NrEhUim
 2026-06-22 14:27:17,698 - INFO - 📤 Updating: captions_data.json
 2026-06-22 14:27:20,975 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:53:39,200 - INFO - 🚀 Starting up...
+2026-06-22 14:53:39,860 - INFO - 🔄 Refreshed Drive token
+2026-06-22 14:53:39,861 - INFO - ✅ Drive authenticated via drive_token.pickle
+2026-06-22 14:53:39,864 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-06-22 14:53:43,261 - INFO - ✅ Found folder: Reel_Finder_Data
+2026-06-22 14:53:43,261 - INFO - 📁 Google Drive Manager initialized successfully
+2026-06-22 14:53:46,720 - INFO - ✅ Browser initialized
+2026-06-22 14:53:46,721 - INFO - 🚀 Caption extractor initialized
+2026-06-22 14:53:46,729 - INFO - 🔄 Auto-capture thread started (interval: 30s)
+2026-06-22 14:53:46,729 - INFO - 🔄 Auto-capture started (interval: 30s)
+2026-06-22 14:53:47,314 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:53:48,430 - INFO - Download progress: 100%
+2026-06-22 14:53:48,431 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:53:49,140 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:53:50,275 - INFO - Download progress: 100%
+2026-06-22 14:53:50,276 - INFO - ✅ Loaded captions data with 1 captions
+2026-06-22 14:53:50,277 - INFO - 📥 Fetching: DZ0LhTaCXey
+2026-06-22 14:54:09,767 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:54:10,777 - INFO - Download progress: 100%
+2026-06-22 14:54:10,778 - INFO - ✅ Loaded captions data with 1 captions
+2026-06-22 14:54:13,144 - INFO - 📤 Updating: captions_data.json (+1 new)
+2026-06-22 14:54:16,006 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:54:16,006 - INFO - ✅ Auto-captured 1 new captions
+2026-06-22 14:54:46,643 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:54:47,580 - INFO - Download progress: 100%
+2026-06-22 14:54:47,580 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:54:48,183 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:54:50,207 - INFO - Download progress: 100%
+2026-06-22 14:54:50,207 - INFO - ✅ Loaded captions data with 2 captions
+2026-06-22 14:55:20,877 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:55:21,934 - INFO - Download progress: 100%
+2026-06-22 14:55:21,934 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:55:22,546 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:55:23,835 - INFO - Download progress: 100%
+2026-06-22 14:55:23,835 - INFO - ✅ Loaded captions data with 2 captions
+2026-06-22 14:55:54,428 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:55:55,647 - INFO - Download progress: 100%
+2026-06-22 14:55:55,648 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:55:56,272 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:55:57,387 - INFO - Download progress: 100%
+2026-06-22 14:55:57,388 - INFO - ✅ Loaded captions data with 2 captions
+2026-06-22 14:55:57,390 - INFO - 📥 Fetching: DZl-J48vKOE
+2026-06-22 14:56:13,195 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:56:14,185 - INFO - Download progress: 100%
+2026-06-22 14:56:14,185 - INFO - ✅ Loaded captions data with 2 captions
+2026-06-22 14:56:14,762 - INFO - 📤 Updating: captions_data.json (+1 new)
+2026-06-22 14:56:17,827 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 14:56:17,828 - INFO - ✅ Auto-captured 1 new captions
+2026-06-22 14:56:48,412 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:56:49,504 - INFO - Download progress: 100%
+2026-06-22 14:56:49,505 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:56:50,117 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:56:51,301 - INFO - Download progress: 100%
+2026-06-22 14:56:51,301 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 14:57:21,864 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:57:23,093 - INFO - Download progress: 100%
+2026-06-22 14:57:23,093 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:57:23,719 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:57:24,825 - INFO - Download progress: 100%
+2026-06-22 14:57:24,825 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 14:57:55,791 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:57:57,044 - INFO - Download progress: 100%
+2026-06-22 14:57:57,044 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:57:57,660 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:57:58,753 - INFO - Download progress: 100%
+2026-06-22 14:57:58,753 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 14:58:29,369 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:58:30,310 - INFO - Download progress: 100%
+2026-06-22 14:58:30,310 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:58:30,942 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:58:32,133 - INFO - Download progress: 100%
+2026-06-22 14:58:32,133 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 14:59:02,762 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:59:04,051 - INFO - Download progress: 100%
+2026-06-22 14:59:04,052 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:59:04,683 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:59:05,693 - INFO - Download progress: 100%
+2026-06-22 14:59:05,693 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 14:59:36,246 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 14:59:37,229 - INFO - Download progress: 100%
+2026-06-22 14:59:37,229 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 14:59:37,855 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 14:59:38,836 - INFO - Download progress: 100%
+2026-06-22 14:59:38,837 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:00:09,496 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:00:11,292 - INFO - Download progress: 100%
+2026-06-22 15:00:11,293 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:00:11,882 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:00:12,940 - INFO - Download progress: 100%
+2026-06-22 15:00:12,940 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:00:43,513 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:00:44,520 - INFO - Download progress: 100%
+2026-06-22 15:00:44,520 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:00:45,116 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:00:47,525 - INFO - Download progress: 100%
+2026-06-22 15:00:47,526 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:01:18,196 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:01:19,196 - INFO - Download progress: 100%
+2026-06-22 15:01:19,197 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:01:19,907 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:01:21,387 - INFO - Download progress: 100%
+2026-06-22 15:01:21,388 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:01:52,006 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:01:55,721 - INFO - Download progress: 100%
+2026-06-22 15:01:55,723 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:01:56,365 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:01:57,552 - INFO - Download progress: 100%
+2026-06-22 15:01:57,552 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:02:28,237 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:02:29,177 - INFO - Download progress: 100%
+2026-06-22 15:02:29,177 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:02:29,882 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:02:30,920 - INFO - Download progress: 100%
+2026-06-22 15:02:30,920 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:03:01,527 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:03:03,370 - INFO - Download progress: 100%
+2026-06-22 15:03:03,370 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:03:03,900 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:03:04,885 - INFO - Download progress: 100%
+2026-06-22 15:03:04,886 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:03:35,414 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:03:37,190 - INFO - Download progress: 100%
+2026-06-22 15:03:37,190 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:03:37,740 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:03:38,797 - INFO - Download progress: 100%
+2026-06-22 15:03:38,798 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:04:09,420 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:04:10,484 - INFO - Download progress: 100%
+2026-06-22 15:04:10,484 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:04:11,110 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:04:12,289 - INFO - Download progress: 100%
+2026-06-22 15:04:12,289 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:04:42,857 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:04:43,812 - INFO - Download progress: 100%
+2026-06-22 15:04:43,812 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:04:44,463 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:04:45,533 - INFO - Download progress: 100%
+2026-06-22 15:04:45,534 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:05:16,099 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:05:17,234 - INFO - Download progress: 100%
+2026-06-22 15:05:17,234 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:05:17,819 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:05:18,881 - INFO - Download progress: 100%
+2026-06-22 15:05:18,881 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:05:49,438 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:05:53,679 - INFO - Download progress: 100%
+2026-06-22 15:05:53,680 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:05:54,238 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:05:55,404 - INFO - Download progress: 100%
+2026-06-22 15:05:55,405 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:06:25,974 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:06:27,029 - INFO - Download progress: 100%
+2026-06-22 15:06:27,029 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:06:27,638 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:06:28,711 - INFO - Download progress: 100%
+2026-06-22 15:06:28,712 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:06:59,328 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:07:00,661 - INFO - Download progress: 100%
+2026-06-22 15:07:00,662 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:07:01,211 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:07:02,262 - INFO - Download progress: 100%
+2026-06-22 15:07:02,263 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:07:02,264 - INFO - 📥 Fetching: DZvfpFEpoyd
+2026-06-22 15:07:21,096 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:07:22,116 - INFO - Download progress: 100%
+2026-06-22 15:07:22,117 - INFO - ✅ Loaded captions data with 3 captions
+2026-06-22 15:07:22,773 - INFO - 📤 Updating: captions_data.json (+1 new)
+2026-06-22 15:07:25,820 - INFO - ✅ Updated captions file: captions_data.json
+2026-06-22 15:07:25,821 - INFO - ✅ Auto-captured 1 new captions
+2026-06-22 15:07:56,425 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:07:58,764 - INFO - Download progress: 100%
+2026-06-22 15:07:58,764 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:07:59,384 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:08:03,658 - INFO - Download progress: 100%
+2026-06-22 15:08:03,659 - INFO - ✅ Loaded captions data with 4 captions
+2026-06-22 15:08:34,313 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:08:35,200 - INFO - Download progress: 100%
+2026-06-22 15:08:35,201 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:08:35,832 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:08:36,940 - INFO - Download progress: 100%
+2026-06-22 15:08:36,941 - INFO - ✅ Loaded captions data with 4 captions
+2026-06-22 15:09:07,519 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:09:09,099 - INFO - Download progress: 100%
+2026-06-22 15:09:09,100 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:09:09,723 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:09:10,772 - INFO - Download progress: 100%
+2026-06-22 15:09:10,772 - INFO - ✅ Loaded captions data with 4 captions
+2026-06-22 15:09:41,384 - INFO - 📥 Downloading: shared_reels.json
+2026-06-22 15:09:42,456 - INFO - Download progress: 100%
+2026-06-22 15:09:42,456 - INFO - ✅ Loaded shared data with 1 URLs
+2026-06-22 15:09:43,080 - INFO - 📥 Downloading: captions_data.json
+2026-06-22 15:09:44,092 - INFO - Download progress: 100%
+2026-06-22 15:09:44,092 - INFO - ✅ Loaded captions data with 4 captions
